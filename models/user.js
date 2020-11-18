@@ -8,16 +8,20 @@ const User = {
     image: '',
     password: '',
     role: '',
-    username: ''
+    username: '',
+    following: [],
+    follower: []
 }
 
 const userModelSchema = new Schema({
-    created_at: { type: Date, default: Date.now },
+    created_at: {type: Date, default: Date.now},
     email: String,
     image: String,
     password: String,
     role: String,
-    username: String
+    username: String,
+    following: [{ type: Schema.ObjectId, ref: this }],
+    follower: [{ type: Schema.ObjectId, ref: this }]
 
 })
 

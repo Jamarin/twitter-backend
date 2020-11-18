@@ -28,10 +28,13 @@ mongoose.connect('mongodb://tweet:tweet@localhost:27017/twitter',
     {useNewUrlParser: true, useUnifiedTopology: true})
 
 const userRoutes = require('./routes/user')
+const publicUserRoutes = require('./routes/publicUser')
 const tweetRoutes = require('./routes/tweet')
 const {authenticateToken} = require("./middlewares/jwt");
 
-app.use('/user', userRoutes)
+app.use('/user', publicUserRoutes)
+
+app.use('/user', authenticateToken, userRoutes)
 
 app.use('/tweet', authenticateToken, tweetRoutes)
 
